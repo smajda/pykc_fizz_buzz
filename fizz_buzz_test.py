@@ -21,6 +21,11 @@ class TestFizzBuzz(unittest.TestCase):
     def test_fizzbuzzify_handles_multiples_of_three_and_five(self):
         self.assertEqual('FizzBuzz', self.fizz_buzz.fizzbuzzify(15))
 
+    def test_fizzbuzz_generator(self):
+        self.assertEqual(
+            list(FizzBuzz(0, 10).generate()),
+            ['0', '1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz'],
+        )
 
 if __name__ == '__main__':
     unittest.main()

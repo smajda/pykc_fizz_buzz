@@ -5,15 +5,20 @@ import argparse
 
 class FizzBuzz(object):
 
-    def fizzbuzzify(self, num):
-        fizz_buzz = ''
+    def __init__(self, start=1, end=10):
+        self.start, self.end = start, end
+
+    @staticmethod
+    def fizzbuzzify(num):
         if num == 0:
-            return str(num)
-        if num % 3 == 0:
-            fizz_buzz += 'Fizz'
-        if num % 5 == 0:
-            fizz_buzz += 'Buzz'
-        return fizz_buzz if len(fizz_buzz) else str(num)
+            return '0'
+        fizzing = 'Fizz' if num % 3 == 0 else ''
+        buzzing = 'Buzz' if num % 5 == 0 else ''
+        return "{}{}".format(fizzing, buzzing) or str(num)
+
+    def generate(self):
+        for num in xrange(self.start, self.end):
+            yield self.fizzbuzzify(num)
 
 
 if __name__ == '__main__':
@@ -24,5 +29,5 @@ if __name__ == '__main__':
     start = args.start
     end = args.end
 
-    for num in xrange(start, end):
-        print(FizzBuzz().fizzbuzzify(num))
+    fizz_buzz = FizzBuzz(start, end)
+    print("\n".join(i for i in fizz_buzz.generate()))
